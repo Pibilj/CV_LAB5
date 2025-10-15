@@ -11,7 +11,7 @@ from skimage import exposure
 from skimage.transform import resize
 
 
-#testing
+#fetching and grayscaling the images from the dataset
 
 data_path = ".data/cifar-10-batches-py"
 
@@ -40,6 +40,7 @@ for i in range(N):
     imgs_gray = np.stack(imgs_gray, axis=0)
     print("Loaded greyscale images shape:", imgs_gray.shape)
 
+#This method is for showing 10 of the images and their label
 def show_images_grid(imgs, labels=None, rows=2, cols=5, title="CIFAR-10 Samples", display_size = (32,32)):
     fig, axes = plt.subplots(rows,cols, figsize=(12,5))
     fig.subtitle(title, fontsize=14)
@@ -57,4 +58,17 @@ def show_images_grid(imgs, labels=None, rows=2, cols=5, title="CIFAR-10 Samples"
 
 show_images_grid(imgs_gray[:10], labels[:10], rows = 2, cols=5, display_size=(64,64))
 
+#computing the hog
 
+features_list = []
+hog_imgs = []
+
+for i in range(len(imgs_gray)):
+    feat, hog_img = hog(
+        imgs_gray[i],
+        orientations=9,
+        pixels_per_cell=(8,8),
+        cells_per_block=(2,2),
+        block_norm="L2-Hys",
+        visualization=True,
+    )
