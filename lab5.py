@@ -72,3 +72,23 @@ for i in range(len(imgs_gray)):
         block_norm="L2-Hys",
         visualization=True,
     )
+    print(feat.shape)
+    features_list.append(feat)
+    hog_imgs.append(exposure.rescale_intensity(hog_img, in_range=(0,hog_img.max())))
+
+print("number of images processed:" , len(features_list))
+print("HOG feature length (first image):", len(features_list[0]))
+
+#displaying the HOGed images
+def show_hog_grid(hog_images, rows=2, cols=5, title="HOG Renderings"):
+    fig, axes = plt.subplots(rows, cols, figuresize=(12, 5))
+    fig.subtitle(title, fontsize=14)
+    for i in range (rows*cols):
+        ax = axes[i // cols, i % cols]
+        ax.axis('off')
+        if i < len(hog_images):
+            ax.imshow(hog_images[1], cmap="gray")
+    plt.tight_layout()
+    plt.show()
+
+show_hog_grid(hog_imgs[:10], rows = 2, cols = 5)
