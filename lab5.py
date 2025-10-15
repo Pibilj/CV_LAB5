@@ -9,3 +9,4 @@ from skimage.color import rgb2gray
 from skimage.feature import hog
 from skimage import exposure
 
+#testing
