@@ -7,13 +7,8 @@ from torchvision.datasets import ImageFolder
 from torchvision import transforms
 from torch.utils.data import TensorDataset, DataLoader
 
-from skimage.color import rgb2gray
-from skimage.feature import hog
-from skimage import exposure
-from skimage.transform import resize
 from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import classification_report, accuracy_score
+
 
 # Check if we can use GPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
