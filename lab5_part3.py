@@ -68,12 +68,12 @@ train_dataset = TensorDataset(x_train_tensor, y_train_tensor)
 test_dataset = TensorDataset(x_test_tensor, y_test_tensor)
 
 #Creating Data loaders
-train_loader = DataLoader(train_dataset, batch_size=100, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=100, shuffle=False)
+train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
 
 # Defining the CNN architecture
 class CNN(nn.Module):
-    def __init__(self, N, M, num_classes=5, input_shape=(3,64,64)):
+    def __init__(self, N, M, num_classes=5, input_shape=(3,64,64), kernal_size = 3):
         super(CNN, self).__init__()
 
         # making a module list for the convolution layers so we can have a different amount of them
@@ -82,7 +82,7 @@ class CNN(nn.Module):
 
         #Here we dynamically create the ammount of convolution layers we want for the NN
         for i in N:
-            conv_layer = nn.Conv2d(in_channels, i, kernel_size=3, padding=1)
+            conv_layer = nn.Conv2d(in_channels, i, kernel_size=kernal_size, padding=kernal_size//2)
             self.convs.append(conv_layer)
             in_channels = i
         
