@@ -2,7 +2,6 @@
 Part 2: Image Classification with Multilayer Perceptron (MLP)
 """
 
-import os
 import numpy as np
 import matplotlib.pyplot as plt
 import torch
@@ -25,9 +24,7 @@ print(f"Using device: {device}")
 
 # STEP 1: DATA LOADING & PREPROCESSING
 
-# Get the directory where this script is located
-script_dir = os.path.dirname(os.path.abspath(__file__))
-data_path = os.path.join(script_dir, "fruit_images")
+data_path = "./CV_LAB5/fruit_images"
 
 # Transform: Resize to 64x64 and convert to tensor (automatically normalizes to [0,1])
 transform = transforms.Compose(
@@ -75,7 +72,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 print(f"\nTraining set: {len(X_train)} images")
 print(f"Test set: {len(X_test)} images")
 
-# Convert b1ack to PyTorch tensors
+# Convert back to PyTorch tensors
 X_train = torch.FloatTensor(X_train)
 X_test = torch.FloatTensor(X_test)
 y_train = torch.LongTensor(y_train)
